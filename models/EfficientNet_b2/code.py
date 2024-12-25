@@ -99,7 +99,6 @@ prediction[0]
 #14. Loss Function and Optimizer
 loss_function = nn.CrossEntropyLoss()
 
-#resnet_opt=torch.optim.SGD(resnet.parameters(),lr=0.01,momentum=0.9)
 efficientnet_opt = torch.optim.Adam(EfficientNet.parameters(), betas=(0.9,0.999),lr=0.001,weight_decay=0.3)
 
 #15. accuracy function
