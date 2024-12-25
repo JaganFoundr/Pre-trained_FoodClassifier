@@ -66,11 +66,13 @@ plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=ViT_transfo
 
 #11 .Now creating the format for training and testing dataset in order to upload to the dataloader.
 
-efficientnet_train_data,efficientnet_test_data=datasets.create_dataset(train_folder="data2/pizza_steak_sushi/train",
+#11 .Now creating the format for training and testing dataset in order to upload to the dataloader.
+
+ViT_train_data,ViT_test_data=datasets.create_dataset(train_folder="data2/pizza_steak_sushi/train",
                                              test_folder="data2/pizza_steak_sushi/test",
 
-                                             train_transform=EfficientNet_transforms,
-                                             test_transform=EfficientNet_transforms,
+                                             train_transform=ViT_transforms,
+                                             test_transform=ViT_transforms,
                                              
                                              target_train_transform=None,
                                              target_test_transform=None)
@@ -78,8 +80,10 @@ efficientnet_train_data,efficientnet_test_data=datasets.create_dataset(train_fol
 
 #12. Preparing Dataloader
 
-efficientnet_train_loader,efficientnet_test_loader=datasets.Dataloader(train_dataset=efficientnet_train_data,
-                                             test_dataset=efficientnet_test_data,
+#12. Preparing Dataloader
+
+ViT_train_loader,ViT_test_loader=datasets.Dataloader(train_dataset=ViT_train_data,
+                                             test_dataset=ViT_test_data,
 
                                              batch_size=32,
                                              num_workers=os.cpu_count(),
@@ -90,17 +94,16 @@ efficientnet_train_loader,efficientnet_test_loader=datasets.Dataloader(train_dat
 
 #13. Untrained Prediction
 torch.manual_seed(42)
-for images, labels in efficientnet_train_loader:
+for images, labels in ViT_train_loader:
   images, labels = images.to(device), labels.to(device)
-  prediction = EfficientNet(images)
+  prediction = ViT(images)
   break
 prediction[0]
 
 #14. Loss Function and Optimizer
 loss_function = nn.CrossEntropyLoss()
 
-#resnet_opt=torch.optim.SGD(resnet.parameters(),lr=0.01,momentum=0.9)
-efficientnet_opt = torch.optim.Adam(EfficientNet.parameters(), betas=(0.9,0.999),lr=0.001,weight_decay=0.3)
+ViT_opt = torch.optim.Adam(ViT.parameters(), betas=(0.9,0.999),lr=0.003,weight_decay=0.3)
 
 #15. accuracy function
 def accuracy(output, labels):
