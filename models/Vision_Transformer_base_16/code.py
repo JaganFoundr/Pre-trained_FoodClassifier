@@ -116,16 +116,16 @@ start_time = timer()
 
 experiment_configs = [
     {
-        'model': EfficientNet,  
-        'optimizer': efficientnet_opt,
+        'model': ViT,  
+        'optimizer': ViT_opt,
         'epochs': 10, 
-        'name': 'efficientnet_b2_Food_Classifying_Exp'
+        'name': 'ViT_b_16_Food_Classifying_Exp'
     }
 ]
 
 # Define the DataLoader for each model (train and test)
-train_loaders = [efficientnet_train_loader]
-test_loaders = [efficientnet_test_loader]
+train_loaders = [ViT_train_loader]
+test_loaders = [ViT_test_loader]
 
 # Call the training function
 metrics.train_plot_tensorboard_multiple_experiments(experiment_configs, train_loaders, test_loaders, loss_function)
@@ -134,31 +134,31 @@ end_time = timer()
 model_runtime.run_time(start_time, end_time, device=device)
 
 #17. confusion matrix for both train and test
-metrics.conf_matrix_for_train(model=EfficientNet,
+metrics.conf_matrix_for_train(model=ViT,
                               image_path="data2/pizza_steak_sushi/train",
-                              train_loader=efficientnet_train_loader)
+                              train_loader=ViT_train_loader)
 
-metrics.conf_matrix_for_test(model=EfficientNet,
+metrics.conf_matrix_for_test(model=ViT,
                              image_path="data2/pizza_steak_sushi/test",
-                             test_loader=efficientnet_test_loader)
+                             test_loader=ViT_test_loader)
 
 #18. Train and Test images prediction
-metrics.train_prediction(class_names_parent_path="data2/pizza_steak_sushi/train",model=EfficientNet,
+metrics.train_prediction(class_names_parent_path="data2/pizza_steak_sushi/train",model=ViT,
                         image_path="data2/pizza_steak_sushi/train",
                         )
 
-metrics.test_prediction(class_names_parent_path="data2/pizza_steak_sushi/test",model=EfficientNet,
+metrics.test_prediction(class_names_parent_path="data2/pizza_steak_sushi/test",model=ViT,
                         image_path="data2/pizza_steak_sushi/test",
                         )
 
 #19. Saving and Loading Model
-torch.save(EfficientNet.state_dict(), "efficient_b2FE_10epoch_Food_Classifier.pth")
-load_model = EfficientNet
+torch.save(ViT.state_dict(), "ViT_b_16FE_10epoch_Food_Classifier.pth")
+load_model = ViT
 
-load_model.load_state_dict(torch.load("efficientnet_b2FE_10epoch_Food_Classifier.pth"))
+load_model.load_state_dict(torch.load("ViT_b_16FE_10epoch_Food_Classifier.pth"))
 
 #20. Testing the custom image
 metrics.custom_image_plot(class_names_parent_path="data/pizza_steak_sushi/test",
                           image_path="data/pizza_steak_sushi/pizza.jpg",
                           device=device,
-                          model=EfficientNet)
+                          model=ViT)
