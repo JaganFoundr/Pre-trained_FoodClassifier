@@ -56,7 +56,7 @@ print(f"Automatically created 18 transforms: {EfficientNet_transforms}")
 
 batch_size=32
 summary(model=EfficientNet, 
-        input_size=(batch_size, 3, 224, 224),
+        input_size=(batch_size, 3, 288, 288),
         col_names=["input_size", "output_size", "num_params", "trainable"],
         col_width=20,
         row_settings=["var_names"])
