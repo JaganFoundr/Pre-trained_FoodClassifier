@@ -63,7 +63,6 @@ summary(model=EfficientNet,
 
 # 10. Transforming and plotting the same raw images.
 plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=EfficientNet_transforms)
-#plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=efficientnet_transforms)
 
 #11 .Now creating the format for training and testing dataset in order to upload to the dataloader.
 
