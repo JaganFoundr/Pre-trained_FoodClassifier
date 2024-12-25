@@ -55,15 +55,14 @@ ViT_transforms = ViT_B_16_Weights.transforms()
 print(f"Automatically created 18 transforms: {ViT_transforms}")
 
 batch_size=32
-summary(model=EfficientNet, 
+summary(model=ViT, 
         input_size=(batch_size, 3, 224, 224),
         col_names=["input_size", "output_size", "num_params", "trainable"],
         col_width=20,
         row_settings=["var_names"])
 
 # 10. Transforming and plotting the same raw images.
-plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=EfficientNet_transforms)
-#plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=efficientnet_transforms)
+plotting.plot_transformed_random("data2/pizza_steak_sushi",transform=ViT_transforms)
 
 #11 .Now creating the format for training and testing dataset in order to upload to the dataloader.
 
